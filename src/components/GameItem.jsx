@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 function GameItem({ game }) {
   return (
     <Link to={`/jeu/${game.id}`} key={game.id}>
+      {console.log("ooo")}
       <div className="bg-white rounded-lg shadow-md p-4">
         <img
           src={game.background_image}

@@ -1,12 +1,14 @@
 import { useState } from "react";
 import "./App.css";
-import GameList from "./components/GameList";
+import GameList from "./pages/GameList";
+import Header from "./components/header";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="grid grid-cols-4">
+    <div >
+        <Header></Header>
       <div className="bg-red-600 h-full hidden md:block">
       
       </div>

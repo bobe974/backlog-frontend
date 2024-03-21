@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import GlobalApi from '../services/GlobalApi';
-import GameItem from './GameItem';
+import GameItem from '../components/GameItem';
 import { Link } from "react-router-dom";
 
 function GameList() {

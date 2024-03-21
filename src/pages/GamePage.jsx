@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import GlobalApi from '../services/GlobalApi';
+import Header from '../components/header';
 
 function GamePage() {
   const { id } = useParams();
@@ -27,6 +28,7 @@ function GamePage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Header></Header>
     <h1 className="text-3xl font-bold mb-4 text-blue-600">{game.name}</h1>
     <div className="grid grid-cols-1 gap-6">
       <img src={game.background_image} alt={game.name} className="w-full h-auto rounded-lg shadow-md transition duration-300 hover:opacity-75" />
