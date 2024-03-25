@@ -12,6 +12,9 @@ function GameItem({ game }) {
             className="w-full h-48 object-cover mb-2"
           />
           <h2 className="text-xl font-bold mb-2 truncate">{game.name}</h2>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Ajouter
+          </button>
         </div>
       </div>
     </Link>

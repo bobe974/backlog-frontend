@@ -6,6 +6,8 @@ import GamePage from './pages/GamePage';
 import GameList from './pages/GameList';
 import Accueil from './pages/Accueil';
 import App from './layout/App';
+import Backlog from './pages/Backlog';
+
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Accueil />,
+      },
+      {
+        path: '/backlog',
+        element: <Backlog/>
       },
     ],
   },
