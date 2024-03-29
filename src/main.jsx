@@ -3,18 +3,21 @@ import ReactDOM from 'react-dom/client'
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import GamePage from './pages/GamePage';
-import GameList from './pages/GameList';
+import GameGalery from './pages/GameGalery';
 import Accueil from './pages/Accueil';
 import App from './layout/App';
+import Backlog from './pages/Backlog';
+import ApplicationContextProvider from './context/ApplicationContextProvider';
+
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App/>,
+    element:  <App/>,
     children: [
       {
         path: 'games',
-        element: <GameList />,
+        element: <GameGalery />,
       },
       {
         path: 'jeu/:id',
@@ -23,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Accueil />,
+      },
+      {
+        path: '/backlog',
+        element: <Backlog/>
       },
     ],
   },
