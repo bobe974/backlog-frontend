@@ -1,20 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import GameItem from '../components/GameItem';
+import { MyContext } from '../context/ApplicationContextProvider';
 
 function Backlog() {
+
+  /*TEST PROVIDER */
   // mock liste de jeux dans le backlog de l'utilisateur
-  const backlogGames = [
-    {
-      id: 1,
-      name: "Game 1",
-      background_image: "image_url_1"
-    },
-    {
-      id: 2,
-      name: "Game 2",
-      background_image: "image_url_2"
-    },
-  ];
+
+  const backlogGames = useContext(MyContext)
 
   return (
     <div className="mt-8"> 

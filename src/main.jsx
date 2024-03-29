@@ -7,12 +7,13 @@ import GameGalery from './pages/GameGalery';
 import Accueil from './pages/Accueil';
 import App from './layout/App';
 import Backlog from './pages/Backlog';
+import ApplicationContextProvider from './context/ApplicationContextProvider';
 
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App/>,
+    element:  <App/>,
     children: [
       {
         path: 'games',
