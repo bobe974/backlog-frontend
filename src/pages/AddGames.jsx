@@ -24,11 +24,15 @@ function AddGames() {
     );
     GlobalApi.ajouterJeu(jeu).then((succes) => {
       if (succes.status === 201) {
-        setSuccessMessage("COUP CRITIQUE : Jeu ajouté avec succès !");
+        setSuccessMessage(
+          <span>
+            COUP CRITIQUE : Le jeu <strong style={{ color: 'green' }}>{jeu.titre}</strong> a été ajouté avec succès !
+          </span>
+        );            
         //reset le formulaire:
         reset();
       } else {
-        setSuccessMessage("ECHEC CRITIQUE : Jeu non ajouté !");
+        setSuccessMessage("ECHEC CRITIQUE !");
       }
     });
   };

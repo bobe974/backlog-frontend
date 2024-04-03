@@ -26,7 +26,7 @@ function ajouterJeu(jeu) {
     };
 
     axiosInstance2
-      .post("http://localhost:9000/api/jeu", data)
+      .post("/jeu", data)
       .then((response) => {
         console.log("Response:", response.status);
         resolve(response); //resoudre la promesse
@@ -74,9 +74,14 @@ function ajouterJoueur(jeu, joueurId, avis, info) {
     });
 }
 
+const getGames = () => axiosInstance2.get('/jeu');
+
+
+
 export default {
   getGameList,
   getGameById,
   ajouterJoueur,
   ajouterJeu,
+  getGames
 };
