@@ -75,6 +75,8 @@ function ajouterJoueur(jeu, joueurId, avis, info) {
 }
 
 const getGames = () => axiosInstance2.get('/jeu');
+const deleteGame = (id) => axiosInstance2.delete(`/jeu/${id}`);
+
 
 
 
@@ -83,5 +85,6 @@ export default {
   getGameById,
   ajouterJoueur,
   ajouterJeu,
-  getGames
+  getGames,
+  deleteGame
 };

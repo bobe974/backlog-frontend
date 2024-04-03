@@ -10,23 +10,32 @@ function AdminGameManagement() {
     //gestion des erreurs
     const [error, setError] = useState("");
 
+    const fetchGames = () => {
+        console.log("Fetching games...");
+        GlobalApi.getGames()
+          .then((response) => {
+            console.log("Réponse jeux:", response.data);
+            setGames(response.data);
+          })
+          .catch((error) => {
+            console.error("Erreur lors de la récupération des jeux:", error);
+            setError("Une erreur s'est produite lors de la récupération des jeux");
+          });
+      };
+
     //lancement au chargement de la page
     useEffect(() => {
         console.log("EFFECT: récupération des jeux");
-        GlobalApi.getGames()
-            .then((response) => {
-                console.log("Réponse jeux:", response.data);
-                setGames(response.data);
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la récupération des jeux:", error);
-                setError("Une erreur s'est produite lors de la récupération des jeux");
-            });
+        fetchGames();
     }, []);
     
-    
+    // maj de la table apres suppression ou modification
+    const refreshTable = () => {
+        console.log("REFRESH")
+        fetchGames();
+    };
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 h-screen">
     <div className="mt-4 mb-8 flex justify-between items-center">
         <h1 className="text-3xl font-semibold mb-4">Gestion des jeux</h1>
         <div>
@@ -79,7 +88,7 @@ function AdminGameManagement() {
                             <td className="border border-gray-300 px-4 py-2">{unjeu.description}</td>
                             <td className="border border-gray-300 px-4 py-2">{unjeu.image}</td>
                             <td className="border border-gray-300 px-4 py-2">
-                                <CrudButtons gameId={unjeu.id} />
+                                <CrudButtons gameId={unjeu.id} refreshTable={refreshTable}/>
                             </td>
                         </tr>
                     ))

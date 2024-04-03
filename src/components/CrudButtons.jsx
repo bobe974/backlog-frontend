@@ -3,8 +3,22 @@ import { Link } from 'react-router-dom';
 import deleteIcon from '../icons/deleteIcon.png';
 import updateIcon from '../icons/updateIcon.png';
 import inspectIcon from '../icons/inspectIcon.png'
+import GlobalApi from '../services/GlobalApi';
 
-function CrudButtons({ gameId }) {
+function CrudButtons({ gameId, refreshTable}) {
+    
+    const handleDelete = () => {
+       GlobalApi.deleteGame(gameId).then( (response)=>{
+        if(response.status === 204){
+            console.log("supprimé")
+            //refresh
+            refreshTable();
+        }
+       }
+    
+       )
+    }
+
     return (
         <>
             <div className='flex items-center justify-center'>
@@ -15,9 +29,9 @@ function CrudButtons({ gameId }) {
                 <img src={updateIcon} alt="Update Icon" className='w-6 h-6'/>
             </Link>
 
-            <Link to={`/deleteGame/${gameId}`}>
-                <img src={deleteIcon} alt="Delete Icon" className='w-6 h-6'/>
-            </Link>
+             <button onClick={handleDelete}>
+                    <img src={deleteIcon} alt="Delete Icon" className='w-6 h-6'/>
+                </button>
             </div>    
         </>
     );
