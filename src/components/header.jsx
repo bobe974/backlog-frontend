@@ -24,6 +24,9 @@ function Header() {
             <li>
               <Link to="/backlog">Mon backlog</Link>
             </li>
+            <li>
+              <Link to="/addGames">Ajouter un Jeu</Link>
+            </li>
           </ul>
         </nav>
         <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded">
