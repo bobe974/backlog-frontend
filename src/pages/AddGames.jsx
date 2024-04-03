@@ -4,7 +4,7 @@ import GlobalApi from "../services/GlobalApi";
 import Jeu from "../modeles/Jeu";
 import { useState } from "react";
 import checkIcon from "../icons/checkIcon.png";
-function GameManagement() {
+function AddGames() {
   const [successMessage, setSuccessMessage] = useState(null);
   const {
     register,
@@ -123,4 +123,4 @@ function GameManagement() {
   );
 }
 
-export default GameManagement;
+export default AddGames;
