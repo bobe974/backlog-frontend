@@ -8,6 +8,7 @@ import Accueil from './pages/Accueil';
 import App from './layout/App';
 import Backlog from './pages/Backlog';
 import ApplicationContextProvider from './context/ApplicationContextProvider';
+import GameManagement from './pages/GameManagement';
 
 
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
         path: '/backlog',
         element: <Backlog/>
       },
+      {
+        path: '/addGames',
+        element: <GameManagement></GameManagement>
+      }
     ],
   },
 ]);
