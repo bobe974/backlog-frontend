@@ -14,45 +14,30 @@ const getGameById = (id) => axiosInstance.get(`/games/${id}?key=${key}`);
 const axiosInstance2 = axios.create({
   baseURL: "http://localhost:9000/api",
 });
-/*TODO VIRER CETTE MERDE */
-/*
-const postJoueurJeu = () => axiosInstance2.post('/joueurjeu', {
-    "joueur": {
-        "id": 3
-        },
-    "jeu": {
-        "id": 2
-    },
-    "etat": "PLATINE",
-    "tempsDeJeu": 4,
-    "dateDebut": "2024-03-26",
-    "dateFin": "2024-03-27",
-    "avis": {
-        "note": 20,
-        "justification": "tres bien j'aime bien",
-        "typeAvis" : "ECLATAX"
-    }
-});**/
+
 function ajouterJeu(jeu) {
-  const data = {
-    titre: jeu.titre,
-    dateSortie: jeu.dateSortie,
-    description: jeu.description,
-    image: jeu.image,
-  };
-  console.log("JSON envoyé à l'API :");
-  console.log(data);
-  const postGame = () =>
-    axiosInstance2.post("http://localhost:9000/api/jeu", data);
-  postGame()
-    .then((response) => {
-      console.log("requête POST Jeu:");
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.error("Erreur lors de la requête POST game :", error);
-    });
+  //transmettre la promesse de axios vers une nouvelle promesse (wtf)
+  return new Promise((resolve, reject) => {
+    const data = {
+      titre: jeu.titre,
+      dateSortie: jeu.dateSortie,
+      description: jeu.description,
+      image: jeu.image,
+    };
+
+    axiosInstance2
+      .post("http://localhost:9000/api/jeu", data)
+      .then((response) => {
+        console.log("Response:", response.status);
+        resolve(response); //resoudre la promesse
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la requête POST game :", error);
+        reject(error); //rejeter la promesse
+      });
+  });
 }
+
 function ajouterJoueur(jeu, joueurId, avis, info) {
   const data = {
     joueur: {
@@ -82,7 +67,7 @@ function ajouterJoueur(jeu, joueurId, avis, info) {
   postJoueurJeu()
     .then((response) => {
       console.log("requête POST JoueurJeu:");
-      console.log(response.data); 
+      console.log(response.data);
     })
     .catch((error) => {
       console.error("Erreur lors de la requête POST :", error);

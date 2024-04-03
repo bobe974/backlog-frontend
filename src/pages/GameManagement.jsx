@@ -2,12 +2,15 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import GlobalApi from "../services/GlobalApi";
 import Jeu from "../modeles/Jeu";
-
+import { useState } from "react";
+import checkIcon from "../icons/checkIcon.png";
 function GameManagement() {
+  const [successMessage, setSuccessMessage] = useState(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
 
   const onSubmit = (data) => {
@@ -19,7 +22,15 @@ function GameManagement() {
       data.description,
       data.image
     );
-    GlobalApi.ajouterJeu(jeu);
+    GlobalApi.ajouterJeu(jeu).then((succes) => {
+      if (succes.status === 201) {
+        setSuccessMessage("COUP CRITIQUE : Jeu ajouté avec succès !");
+        //reset le formulaire:
+        reset();
+      } else {
+        setSuccessMessage("ECHEC CRITIQUE : Jeu non ajouté !");
+      }
+    });
   };
 
   return (
@@ -102,6 +113,12 @@ function GameManagement() {
           </button>
         </form>
       </div>
+      {successMessage && (
+        <div className="flex items-center justify-center mt-4 p-3 border border-green-600 bg-green-100 rounded-md text-black">
+          <img src={checkIcon} alt="Check Icon" className="w-6 h-6 mr-2" />
+          <p className="text-green-600">{successMessage}</p>
+        </div>
+      )}
     </div>
   );
 }
