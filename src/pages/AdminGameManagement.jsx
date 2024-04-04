@@ -88,7 +88,7 @@ function AdminGameManagement() {
                             <td className="border border-gray-300 px-4 py-2">{unjeu.description}</td>
                             <td className="border border-gray-300 px-4 py-2">{unjeu.image}</td>
                             <td className="border border-gray-300 px-4 py-2">
-                                <CrudButtons gameId={unjeu.id} refreshTable={refreshTable}/>
+                                <CrudButtons game={unjeu} refreshTable={refreshTable}/>
                             </td>
                         </tr>
                     ))

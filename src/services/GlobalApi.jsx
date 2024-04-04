@@ -7,8 +7,8 @@ const axiosInstance = axios.create({
 });
 
 //api externe
-const getGameList = () => axiosInstance.get(`/games?key=${key}`);
-const getGameById = (id) => axiosInstance.get(`/games/${id}?key=${key}`);
+const getRawgGameList = () => axiosInstance.get(`/games?key=${key}`);
+const getRawgGameById = (id) => axiosInstance.get(`/games/${id}?key=${key}`);
 
 //api backlog
 const axiosInstance2 = axios.create({
@@ -75,16 +75,26 @@ function ajouterJoueur(jeu, joueurId, avis, info) {
 }
 
 const getGames = () => axiosInstance2.get('/jeu');
+const getGameById = (id) => axiosInstance2.get(`/jeu/${id}`);
 const deleteGame = (id) => axiosInstance2.delete(`/jeu/${id}`);
 
-
-
+function modifierJeu(jeu){
+  const data = {
+    titre: jeu.titre,
+    dateSortie: jeu.dateSortie,
+    description: jeu.description,
+    image: jeu.image,
+  }
+return axiosInstance2.put(`/jeu/${jeu.id}`,data);
+}
 
 export default {
-  getGameList,
+  getRawgGameList,
+  getRawgGameById,
   getGameById,
   ajouterJoueur,
   ajouterJeu,
   getGames,
-  deleteGame
+  deleteGame,
+  modifierJeu
 };

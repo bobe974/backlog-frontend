@@ -11,7 +11,7 @@ function GamePage() {
   }, [id]); //tableau de dépendance, si l'id change en paramètre, l'effet est réexécuté
 
   const fetchGame = () => {
-    GlobalApi.getGameById(id)
+    GlobalApi.getRawgGameById(id)
       .then((response) => {
         console.log("Réponse :", response.data);
         setGame(response.data);
