@@ -85,7 +85,8 @@ function modifierJeu(jeu){
     description: jeu.description,
     image: jeu.image,
   }
-return axiosInstance2.put(`/jeu/${jeu.id}`,data);
+console.log("Data envoyé pour update " + jeu.id + data.titre + data.dateSortie + data.description + data.image);
+  return axiosInstance2.put(`/jeu/${jeu.id}`, data);
 }
 
 export default {

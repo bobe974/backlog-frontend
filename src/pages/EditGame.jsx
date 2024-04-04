@@ -5,8 +5,11 @@ import checkIcon from "../icons/checkIcon.png";
 import GlobalApi from "../services/GlobalApi";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Jeu from "../modeles/Jeu";
 
+// TODO probleme avec required si l'user de modifie pas un champ -> considéré comme vide -> IMPENSABLE MODIFIE CA FUMIER!
 function EditGame() {
+    //recup l'id en param de l'url
     let {id} = useParams();
 
   const [successMessage, setSuccessMessage] = useState(null);
@@ -16,6 +19,7 @@ function EditGame() {
     handleSubmit,
     formState: { errors },
     reset,
+    values,
   } = useForm();
 
 
@@ -24,17 +28,35 @@ function EditGame() {
     //récuperer les données du jeu
     GlobalApi.getGameById(id).then((response) => {
         console.log("RESPONSE" + response.data.titre);
-        //préremplir le formulaire
+        //préremplir le formulaire via useState
         setGame(response.data);
-
     }
-    );
+    ).catch((error) => {
+      console.error("Erreur lors de la récupération du jeu :", error);
+      // Gérer les erreurs si nécessaire
+    });
   }, []);
 
-  const onSubmit = (data) => ({
+  //data = donnée du form ! 
+  const onSubmit = (data) => {
+    //recréer un obj car l'id n'est pas dans le formulaire
+    const jeu = new Jeu(game.id,data.titre,data.dateSortie,data.description,data.image)
+    console.log("Json envoyé id :" + jeu.id);
     //requete PUT
+    GlobalApi.modifierJeu(jeu).then((response) =>{
+        console.log("RESPONSE MSG" + response.status)
+        if(response.status === 200){
+            setSuccessMessage(
+                <span>
+                  COUP CRITIQUE : Le jeu <strong style={{ color: 'green' }}>{jeu.titre}</strong> a été modifié avec succès !
+                </span>
+              ); 
+        }else{
+            setSuccessMessage("ECHEC CRITIQUE !");
+        }
+    })
     //verifier le retour et afficher msg de confirmation
-  });
+  };
 
   return (
     <div className="h-screen">
@@ -50,8 +72,9 @@ function EditGame() {
             <input
               type="text"
               id="nom"
-              {...register("nom")}
+              {...register("titre")}
               className="mt-1 p-2 border rounded-md w-full"
+              defaultValue = {game?game.titre:""}
             />
           </div>
 
@@ -67,6 +90,7 @@ function EditGame() {
               id="dateSortie"
               {...register("dateSortie", { required: true })}
               className="mt-1 p-2 border rounded-md w-full"
+              defaultValue = {game?game.dateSortie:""}
             />
             {errors.dateSortie && (
               <span className="text-red-500 text-sm">Ce champ est requis</span>
@@ -84,6 +108,7 @@ function EditGame() {
               id="description"
               {...register("description", { required: true })}
               className="mt-1 p-2 border rounded-md w-full"
+              defaultValue = {game?game.description:""}
             />
             {errors.description && (
               <span className="text-red-500 text-sm">Ce champ est requis</span>
@@ -100,8 +125,9 @@ function EditGame() {
             <input
               type="text"
               id="image"
-              {...register("image", { required: true })}
+              {...register("image", { required: true})}
               className="mt-1 p-2 border rounded-md w-full"
+              defaultValue = {game?game.image:""}
             />
             {errors.image && (
               <span className="text-red-500 text-sm">Ce champ est requis</span>
