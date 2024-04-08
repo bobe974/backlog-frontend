@@ -12,7 +12,7 @@ function GameGalery() {
   }, []);
 
   const fetchGames = () => {
-    GlobalApi.getGameList()
+    GlobalApi.getRawgGameList()
       .then((response) => {
         console.log("Réponse :", response.data);
         setGameList(response.data.results);

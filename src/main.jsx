@@ -7,7 +7,10 @@ import GameGalery from './pages/GameGalery';
 import Accueil from './pages/Accueil';
 import App from './layout/App';
 import Backlog from './pages/Backlog';
-import ApplicationContextProvider from './context/ApplicationContextProvider';
+import AddGames from './pages/AddGames';
+import AdminGameManagement from './pages/AdminGameManagement';
+import EditGame from './pages/EditGame';
+
 
 
 const router = createBrowserRouter([
@@ -31,6 +34,16 @@ const router = createBrowserRouter([
         path: '/backlog',
         element: <Backlog/>
       },
+      {
+        path: '/AdminManagement',
+        element: <AdminGameManagement></AdminGameManagement>
+      },{
+        path: '/addGame',
+        element: <AddGames></AddGames>
+      },{
+        path: '/editGame/:id',
+        element: <EditGame></EditGame>
+      }
     ],
   },
 ]);

@@ -25,7 +25,7 @@ function Header() {
               <Link to="/backlog">Mon backlog</Link>
             </li>
             <li>
-              <Link to="/addGames">Ajouter un Jeu</Link>
+              <Link to="/AdminManagement">Gestion des jeux</Link>
             </li>
           </ul>
         </nav>
