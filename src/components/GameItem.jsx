@@ -32,8 +32,7 @@ function GameItem({ game }) {
   const avis = new Avis(0,20,"Tres bon jeu depuis API", "GODTIER");
   const infos = new Info("PLATINE",120,"2024-03-26","2024-04-02");
   //ajout dans l'api backlog via endpoint POST
-  GlobalApi.ajouterJoueur(jeu,1, avis,infos);
-
+  GlobalApi.ajouterJeuJoueur(jeu,1, avis,infos);
   };
 
   return (
