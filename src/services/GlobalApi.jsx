@@ -38,7 +38,7 @@ function ajouterJeu(jeu) {
   });
 }
 
-function ajouterJoueur(jeu, joueurId, avis, info) {
+function ajouterJeuJoueur(jeu, joueurId, avis, info) {
   const data = {
     joueur: {
       id: joueurId,
@@ -77,6 +77,7 @@ function ajouterJoueur(jeu, joueurId, avis, info) {
 const getGames = () => axiosInstance2.get('/jeu');
 const getGameById = (id) => axiosInstance2.get(`/jeu/${id}`);
 const deleteGame = (id) => axiosInstance2.delete(`/jeu/${id}`);
+const getJoueurJeuById = (id) => axiosInstance2.get(`/joueurjeu/joueur/${id}`);
 
 function modifierJeu(jeu){
   const data = {
@@ -93,7 +94,8 @@ export default {
   getRawgGameList,
   getRawgGameById,
   getGameById,
-  ajouterJoueur,
+  getJoueurJeuById,
+  ajouterJeuJoueur,
   ajouterJeu,
   getGames,
   deleteGame,

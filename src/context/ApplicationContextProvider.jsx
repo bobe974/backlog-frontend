@@ -2,12 +2,12 @@ import React from 'react'
 import { createContext } from 'react';
 
 export const MyContext = createContext([]);
-const test = "ayaooo";
+const test = "cc";
 
 const data = [
   {
     id: 1,
-    name: "Game 1",
+    name: test,
     background_image: "image_url_1"
   },
   {
