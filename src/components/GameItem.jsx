@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import GlobalApi from "../services/GlobalApi";
 import Jeu from "../modeles/Jeu";
 import Info from "../modeles/Info";
@@ -8,8 +8,17 @@ import JoueurJeu from "../modeles/JoueurJeu";
 
 function GameItem({ game }) {
   const FAKEIDUSER = 1;
-  const [gameState, setGameState] = useState(game);
+  
+  const [gameState, setGameState] = useState(null);
   const [joueurJeuId, setjoueurJeuId] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (gameState !== null) {
+      updateGameStatus();
+    }
+  }, [gameState]);
+
   const handleAddClick = () => {
     /*
     //recupere la description
@@ -43,7 +52,7 @@ function GameItem({ game }) {
     GlobalApi.ajouterJeuJoueur(jeu, FAKEIDUSER, avis, infos);
   };
 
-  const updateGameStatus = () => {
+  const updateGameStatus = (newState) => {
     //récupérer l'id joueurjeu avec l'id jeu et joueur
     GlobalApi.getJoueurJeuByJeuAndJoueurId(FAKEIDUSER, game.id)
       .then((response) => {
@@ -55,7 +64,8 @@ function GameItem({ game }) {
         console.log("JeuJoueurID:" + joueurJeuId);
 
         const updatedJoueurJeu = new JoueurJeu();
-        updatedJoueurJeu.setEtat("BACKLOG");
+        console.log("gameState:" + newState);
+        updatedJoueurJeu.setEtat(newState);
         /** ******************************************TODO ***********************************************/
         //actualiser la page apres chaque update
         //updateGameStatus se base sur gameState pour adapter ces actions suivant l'état
@@ -67,6 +77,7 @@ function GameItem({ game }) {
         GlobalApi.updateJoueurJeu(updatedJoueurJeu, id)
           .then((updateResponse) => {
             console.log("Mise à jour réussie:", updateResponse);
+            //redirection vers la page backlog
           })
           .catch((updateError) => {
             console.error(
@@ -94,23 +105,52 @@ function GameItem({ game }) {
         <div className="flex space-x-2">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-            onClick={handleAddClick}
+            onClick={() => {
+              const newState = "BACKLOG";
+              setGameState(newState);
+              updateGameStatus(newState);
+            }}
           >
             +
           </button>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-            onClick={updateGameStatus}
+            onClick={() => {
+              const newState = "ENCOURS";
+              setGameState(newState);
+              updateGameStatus(newState);
+            }}
           >
-            BOUTONTEST
+            EC
           </button>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+            onClick={() => {
+              const newState = "TERMINE";
+              setGameState(newState);
+              updateGameStatus(newState);
+            }}
+          >
             T
           </button>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+            onClick={() => {
+              const newState = "PLATINE";
+              setGameState(newState);
+              updateGameStatus(newState);
+            }}
+          >
             P
           </button>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+            onClick={() => {
+              const newState = "WISHLIST";
+              setGameState(newState);
+              updateGameStatus(newState);
+            }}
+          >
             W
           </button>
         </div>
