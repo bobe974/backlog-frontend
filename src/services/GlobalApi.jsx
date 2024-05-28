@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import axios from "axios";
 
 //TODO ADD APY KEY
@@ -74,6 +75,28 @@ function ajouterJeuJoueur(jeu, joueurId, avis, info) {
     });
 }
 
+const getJoueurJeuByJeuAndJoueurId = (idJoueur, idJeu) => axiosInstance2.get(`/joueurjeu/${idJoueur}/${idJeu}`);
+
+function updateJoueurJeu(updatedJoueurJeu, id){
+  //convertir l'objet en format JSON
+  const data = JSON.stringify(updatedJoueurJeu);
+
+  console.log("Données JSON envoyées :", data);
+
+  axiosInstance2.put(`/joueurjeu/${id}`, data, {
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+.then(response => {
+    console.log("Mise à jour réussie :", response);
+})
+.catch(error => {
+    console.error("Erreur lors de la mise à jour du joueurJeu :", error);
+});
+}
+
+
 const getGames = () => axiosInstance2.get('/jeu');
 const getGameById = (id) => axiosInstance2.get(`/jeu/${id}`);
 const deleteGame = (id) => axiosInstance2.delete(`/jeu/${id}`);
@@ -99,5 +122,7 @@ export default {
   ajouterJeu,
   getGames,
   deleteGame,
-  modifierJeu
+  modifierJeu,
+  updateJoueurJeu,
+  getJoueurJeuByJeuAndJoueurId
 };

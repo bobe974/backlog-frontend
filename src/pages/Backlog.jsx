@@ -37,7 +37,7 @@ function Backlog() {
           En cours
         </button>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1"
-        onClick={() => setCurrentFilter('AFAIRE')}>
+        onClick={() => setCurrentFilter('TERMINE')}>
           Terminé
         </button>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1"
