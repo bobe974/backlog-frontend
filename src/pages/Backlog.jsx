@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import GameItem from '../components/GameItem';
+import GameItemBack from '../components/GameItemBack';
 import GlobalApi from '../services/GlobalApi';
 
 function Backlog() {
@@ -54,7 +54,7 @@ function Backlog() {
           backlogGames
             .filter(jeujoueur => jeujoueur.etat === currentFilter)
             .map(jeujoueur => (
-              <GameItem key={jeujoueur.jeu.id} game={jeujoueur.jeu} />
+              <GameItemBack key={jeujoueur.jeu.id} game={jeujoueur.jeu} />
             ))
         ) : (
           <p>Aucun jeu trouvé pour le filtre sélectionné.</p>

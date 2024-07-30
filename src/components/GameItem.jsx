@@ -19,37 +19,21 @@ function GameItem({ game }) {
     }
   }, [gameState]);
 
-  const handleAddClick = () => {
-    /*
-    //recupere la description
-    GlobalApi.getGameById(game.id)
-    .then(response => {
-      const description = response.data.description_raw;
-      console.log("description: ", description);
-       //creation des objs
-    const jeu = new Jeu(game.id,game.name,game.released,
-      description, game.background_image)
-      console.log("decr jeu obj" + jeu.description);
-    const avis = new Avis(0,20,"Tres bon jeu depuis API", "GODTIER");
-    const infos = new Info("PLATINE",120,"2024-03-26","2024-04-02");
-    //ajout dans l'api backlog via endpoint POST
-    GlobalApi.ajouterJoueur(jeu,1, avis,infos);
-    })
-    .catch(error => {
-      console.error("Une erreur s'est produite lors de la récupération de la description du jeu :", error);
-    }); */
-    //creation des objs
+  const addToBacklog = () => {
+  
     const jeu = new Jeu(
       game.id,
-      game.name,
-      game.released,
-      "blabla",
-      game.background_image
+      game.titre,
+      game.dateSortie,
+      game.description,
+      game.image
     );
+    /***********************************MOCK***********************************/
     const avis = new Avis(0, 20, "Tres bon jeu depuis API", "GODTIER");
-    const infos = new Info("PLATINE", 120, "2024-03-26", "2024-04-02");
+    const infos = new Info("BACKLOG", 120, "2024-03-26", "2024-04-02");
+    /***********************************TODO***********************************/
     //ajout dans l'api backlog via endpoint POST
-    GlobalApi.ajouterJeuJoueur(jeu, FAKEIDUSER, avis, infos);
+    GlobalApi.ajouterJeuJoueur( game.id, FAKEIDUSER, avis, infos);
   };
 
   const updateGameStatus = (newState) => {
@@ -96,62 +80,23 @@ function GameItem({ game }) {
       <div className="flex flex-col">
         <Link to={`/jeu/${game.id}`} key={game.id}>
           <img
-            src={game.background_image}
-            alt={game.name}
+            src={game.image} //background_image
+            alt={game.titre} //name
             className="w-full h-48 object-cover mb-2"
           />
         </Link>
-        <h2 className="text-xl font-bold mb-2 truncate">{game.name}</h2>
+        <h2 className="text-xl font-bold mb-2 truncate">{game.titre}</h2> 
         <div className="flex space-x-2">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
             onClick={() => {
               const newState = "BACKLOG";
-              setGameState(newState);
-              updateGameStatus(newState);
+              //setGameState(newState);
+              //updateGameStatus(newState);
+              addToBacklog();
             }}
           >
-            +
-          </button>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-            onClick={() => {
-              const newState = "ENCOURS";
-              setGameState(newState);
-              updateGameStatus(newState);
-            }}
-          >
-            EC
-          </button>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-            onClick={() => {
-              const newState = "TERMINE";
-              setGameState(newState);
-              updateGameStatus(newState);
-            }}
-          >
-            T
-          </button>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-            onClick={() => {
-              const newState = "PLATINE";
-              setGameState(newState);
-              updateGameStatus(newState);
-            }}
-          >
-            P
-          </button>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-            onClick={() => {
-              const newState = "WISHLIST";
-              setGameState(newState);
-              updateGameStatus(newState);
-            }}
-          >
-            W
+            Ajouter au backlog
           </button>
         </div>
       </div>

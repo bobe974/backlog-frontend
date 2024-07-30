@@ -39,16 +39,13 @@ function ajouterJeu(jeu) {
   });
 }
 
-function ajouterJeuJoueur(jeu, joueurId, avis, info) {
+function ajouterJeuJoueur(idJeu, joueurId, avis, info) {
   const data = {
     joueur: {
       id: joueurId,
     },
     jeu: {
-      titre: jeu.titre,
-      dateSortie: jeu.dateSortie,
-      description: jeu.description,
-      image: jeu.image,
+      id: idJeu
     },
     etat: info.etat,
     tempsDeJeu: info.tempsDeJeu,

@@ -12,10 +12,10 @@ function GameGalery() {
   }, []);
 
   const fetchGames = () => {
-    GlobalApi.getRawgGameList()
+    GlobalApi.getGames()
       .then((response) => {
         console.log("Réponse :", response.data);
-        setGameList(response.data.results);
+        setGameList(response.data);
       })
       .catch((error) => {
         console.error("Erreur lors de la récupération de la liste des jeux vidéo :", error);
